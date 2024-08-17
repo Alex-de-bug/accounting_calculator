@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import {FormControlLabel, Checkbox, Container, Box, Typography, TextField, Tooltip, Select, MenuItem, InputLabel, FormControl } from '@mui/material';
 import Navbar from '../components/Navbar';
 
-const Main = () => {
+const Calc = () => {
   const [result, setResult] = useState(0); // Состояние для результата
   const [resultPD, setResultPD] = useState(0); // Состояние для результата
 
-  const [baseRate, setBaseRate] = useState(0); // Состояние для базовой ставки
+  const [baseRate, setBaseRate] = useState(6000); // Состояние для базовой ставки
   const [opf, setOpf] = useState('ИП'); // Состояние для выбора ОПФ
   const [sno, setSno] = useState('УСН Д'); // Состояние для выбора СНО
   const [activity, setActivity] = useState('Торговля'); // Состояние для вида деятельности
@@ -152,9 +152,7 @@ const Main = () => {
             justifyContent="center"
             minHeight="100vh"
         >
-            <Typography variant="h4" gutterBottom>
-            Калькулятор
-            </Typography>
+
 
             <Tooltip title="Рассчитывается, как 3 часа работы аутсорсером">
                         <TextField 
@@ -167,6 +165,8 @@ const Main = () => {
                             inputProps={{
                             pattern: "[0-9]*",
                             }}
+                            variant="filled"
+                            color="secondary"
                         />
             </Tooltip>
 
@@ -177,7 +177,8 @@ const Main = () => {
                     justifyContent="space-between" 
                     alignItems="center"
                 >
-                    <FormControl margin="normal" style={{ flex: 1, marginRight: '8%' }}>
+                    <FormControl margin="normal" style={{ flex: 1, marginRight: '8%' }} variant="filled"
+                            color="secondary">
                         <InputLabel id="opf-label">ОПФ</InputLabel>
                         <Select
                             labelId="opf-label"
@@ -190,7 +191,8 @@ const Main = () => {
                         </Select>
                     </FormControl>
 
-                    <FormControl  margin="normal" style={{ flex: 1}}>
+                    <FormControl  margin="normal" style={{ flex: 1}} variant="filled"
+                            color="secondary">
                         <InputLabel id="sno-label">СНО</InputLabel>
                         <Select
                             labelId="sno-label"
@@ -211,7 +213,8 @@ const Main = () => {
             </Container>
 
             {(opf === 'ООО' || (opf === 'ИП' && (sno === 'УСН Д-Р' || sno === 'ОСН'))) && (
-                        <FormControl margin="normal" fullWidth >
+                        <FormControl margin="normal" fullWidth variant="filled"
+                        color="secondary">
                             <InputLabel id="activity-label">Вид деятельности</InputLabel>
                             <Select
                             labelId="activity-label"
@@ -230,8 +233,8 @@ const Main = () => {
                         )}
 
             {(opf === 'ИП') && (
-                    <FormControlLabel labelPlacement="start" 
-                    control={<Checkbox checked={isEmployer} 
+                    <FormControlLabel labelPlacement="start"  
+                    control={<Checkbox color="secondary" checked={isEmployer} 
                     onChange={handleChangeCheckBox(setIsEmployer)} />} label="Является работодателем" />
                     )}
             <br />
@@ -254,6 +257,8 @@ const Main = () => {
                         inputProps={{
                         pattern: "[0-9]*", 
                         }}
+                        variant="filled"
+                        color="secondary"
                     />
 
                     <TextField
@@ -266,6 +271,8 @@ const Main = () => {
                         inputProps={{
                         pattern: "[0-9]*", 
                         }}
+                        variant="filled"
+                        color="secondary"
                     />
                 </div>
             </Box>
@@ -288,6 +295,8 @@ const Main = () => {
                         inputProps={{
                         pattern: "[0-9]*", 
                         }}
+                        variant="filled"
+                        color="secondary"
                     />
 
                     <TextField
@@ -300,6 +309,8 @@ const Main = () => {
                         inputProps={{
                         pattern: "[0-9]*", 
                         }}
+                        variant="filled"
+                        color="secondary"
                     />
                 </div>
             </Box>
@@ -323,6 +334,8 @@ const Main = () => {
                         pattern: "[0-9]*", 
                         }}
                         helperText="(Wildberries, СДЭК, Boxberry и другие)"
+                        variant="filled"
+                        color="secondary"
                     />
             
                     {(opf === 'ООО') && (
@@ -336,6 +349,8 @@ const Main = () => {
                             inputProps={{
                             pattern: "[0-9]*", 
                             }}
+                            variant="filled"
+                            color="secondary"
                         />
                         )}
                 </div>
@@ -350,15 +365,16 @@ const Main = () => {
                 >
                 <div>
                     <FormControlLabel labelPlacement="start" 
-                        control={<Checkbox checked={fsrar} 
+                        control={<Checkbox
+                            color="secondary" checked={fsrar} 
                         onChange={handleChangeCheckBox(setFsrar)} />} label="Отчеты в ФСРАР" />
                 
                     <FormControlLabel labelPlacement="start" 
-                            control={<Checkbox checked={ved} 
+                            control={<Checkbox color="secondary" checked={ved} 
                             onChange={handleChangeCheckBox(setVed)} />} label="ВЭД" />
 
                     <FormControlLabel labelPlacement="start" 
-                            control={<Checkbox checked={credits} 
+                            control={<Checkbox color="secondary" checked={credits} 
                             onChange={handleChangeCheckBox(setCredits)} />} label="Кредиты, лизинг" />
                 </div>
             </Box>
@@ -382,6 +398,8 @@ const Main = () => {
                         inputProps={{
                         pattern: "[0-9]*", 
                         }}
+                        variant="filled"
+                        color="secondary"
                     />
                     )}
 
@@ -396,6 +414,8 @@ const Main = () => {
                         pattern: "[0-9]*", 
                         }}
                         helperText="(по договорам ГПХ)"
+                        variant="filled"
+                        color="secondary"
                     />
                 </div>
             </Box>
@@ -409,15 +429,15 @@ const Main = () => {
                 >
                 <div>
                     <FormControlLabel labelPlacement="start" 
-                        control={<Checkbox checked={foreign} 
+                        control={<Checkbox color="secondary" checked={foreign} 
                         onChange={handleChangeCheckBox(setForeign)} />} label="Иностранные работники" />
                 
                     <FormControlLabel labelPlacement="start" 
-                            control={<Checkbox checked={decr} 
+                            control={<Checkbox color="secondary" checked={decr} 
                             onChange={handleChangeCheckBox(setDecr)} />} label="Декретницы" />
 
                     <FormControlLabel labelPlacement="start" 
-                            control={<Checkbox checked={komandirovk} 
+                            control={<Checkbox color="secondary" checked={komandirovk} 
                             onChange={handleChangeCheckBox(setKomandirovk)} />} label="Командировки" />
                 </div>
             </Box>
@@ -441,6 +461,8 @@ const Main = () => {
                         pattern: "[0-9]*", 
                         }}
                         helperText="(комплектов внесено бухгалтером в базу)"
+                        variant="filled"
+                        color="secondary"
                     />
                     <TextField
                         label="Реализация товаров и услуг"
@@ -453,6 +475,8 @@ const Main = () => {
                         pattern: "[0-9]*", 
                         }}
                         helperText="(комплектов внесено бухгалтером в базу)"
+                        variant="filled"
+                        color="secondary"
                     />
                     <TextField
                         label="Счет + Реализация товаров и услуг"
@@ -465,6 +489,8 @@ const Main = () => {
                         pattern: "[0-9]*", 
                         }}
                         helperText="(комплектов выписано бухгалтером по просьбе клиента)"
+                        variant="filled"
+                        color="secondary"
                     />
                     <TextField
                         label="Авансовые отчеты"
@@ -476,6 +502,8 @@ const Main = () => {
                         inputProps={{
                         pattern: "[0-9]*", 
                         }}
+                        variant="filled"
+                        color="secondary"
                     />
                 </div>
             </Box>
@@ -491,6 +519,8 @@ const Main = () => {
                     pattern: "[0-9]*", 
                     }}
                     helperText="(которые делать аутсорсеру, исключая бюджетные)"
+                    variant="filled"
+                    color="secondary"
                 />
                 
             <br />
@@ -510,7 +540,7 @@ const Main = () => {
   );
 };
 
-export default Main;
+export default Calc;
 
 {/* <TextField
                 label=""

@@ -23,7 +23,7 @@ function Login() {
   };
 
   const navigateToHome = () => {
-    navigate('/home');
+    navigate('/edit');
   };
 
   useEffect(() => {

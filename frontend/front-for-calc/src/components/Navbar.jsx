@@ -1,27 +1,11 @@
-import "../styles/NavigationBar.css";
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-import { Link } from "react-router-dom";
-import { Menu, MenuItem } from "@mui/material";
-import { useState } from "react";
-import "../styles/styles.css"; 
+import React, { useState } from 'react';
+import { AppBar, Toolbar, Typography, Button, Menu, MenuItem, useMediaQuery, useTheme, Box } from '@mui/material';
+import { Link } from 'react-router-dom';
 
-function removeTokenFromLocalStorage() {
-    localStorage.removeItem('token');
-    window.location.reload();
-}
+function Navbar() {
+    const theme = useTheme();
+    const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
-export default function WithSubnavigation() {
-    const token = localStorage.getItem('token');
-    return (
-        <DesktopNav hasToken={!!token} />
-    );
-}
-
-const DesktopNav = ({ hasToken }) => {
     const [anchorEl, setAnchorEl] = useState(null);
 
     const handleClick = (event) => {
@@ -32,83 +16,105 @@ const DesktopNav = ({ hasToken }) => {
         setAnchorEl(null);
     };
 
-    const renderNavigation = () => {
-        const appBarStyle = {
-            backgroundColor: '#333', 
-            color: 'white' 
-        };
-
-        return (
-            <Box sx={{ flexGrow: 1 }}>
-                <AppBar position="static">
-                    <Toolbar>
-                        <Typography className="top-text" variant="h6" component="div" sx={{ flexGrow: 1 }} >
-                            {hasToken ? 'Режим администратора' : 'Бухгалтерия Жуковых'}
-                        </Typography>
-                        <Button
-                            aria-controls="menu"
-                            aria-haspopup="true"
-                            onClick={handleClick}
-                            className="gradient-text"
-                            variant="outlined"
-                            color="secondary"
-                        >
-                            Меню
-                        </Button>
-                        <Menu
-                            id="menu"
-                            anchorEl={anchorEl}
-                            open={Boolean(anchorEl)}
-                            onClose={handleClose}
-                        >
-                            {hasToken ? (
-                                <>
-                                    <MenuItem onClick={handleClose}>
-                                        <Link to="/home" className="linkRR">
-                                            Редактирование
-                                        </Link>
-                                    </MenuItem>
-                                    <MenuItem onClick={handleClose}>
-                                        <Link to="/" className="linkRR">
-                                            Калькулятор
-                                        </Link>
-                                    </MenuItem>
-                                    <MenuItem onClick={() => { handleClose(); removeTokenFromLocalStorage(); }}>
-                                        <Link to="/" className="linkRR">
-                                            Выход
-                                        </Link>
-                                    </MenuItem>
-                                </>
-                            ) : (
-                                NAV_ITEMS.map((navItem) => (
-                                    <MenuItem key={navItem.label} onClick={handleClose}>
-                                        <Link to={navItem.href} className="linkRR">
-                                            {navItem.label}
-                                        </Link>
-                                    </MenuItem>
-                                ))
-                            )}
-                        </Menu>
-                    </Toolbar>
-                </AppBar>
-            </Box>
-        );
+    const removeTokenFromLocalStorage = () => {
+        localStorage.removeItem('token');  // Удаление токена из локального хранилища
     };
 
-    return renderNavigation();
-};
+    const hasToken = !!localStorage.getItem('token');  // Проверка наличия токена в локальном хранилище
 
-const NAV_ITEMS = [
-    {
-        label: "Калькулятор",
-        href: "/"
-    },
-    {
-        label: "Вход",
-        href: "/login"
-    },
-    {
-        label: "Регистрация",
-        href: "/signUp"
-    }
-];
+    const NAV_ITEMS = [
+        { label: 'Главная', href: '/' },
+        { label: 'Вход', href: '/login' },
+        { label: 'Регистрация', href: '/reg' },
+    ];
+
+    return (
+        <Box sx={{ flexGrow: 1 }}>
+            <AppBar position="static">
+                <Toolbar>
+                    <Typography
+                        variant="h6"
+                        component="div"
+                        sx={{
+                            flexGrow: 1,
+                            fontWeight: 'bold',
+                            textAlign: 'center',
+                            marginRight: isSmallScreen ? 0 : 'auto',
+                            marginLeft: isSmallScreen ? 0 : 'auto',
+                        }}
+                    >
+                        {hasToken ? 'Режим администратора' : 'ИП ЖУКОВ ВАДИМ АЛЕКСАНДРОВИЧ'}
+                    </Typography>
+                    {isSmallScreen ? (
+                        <>
+                            <Button
+                                aria-controls="menu"
+                                aria-haspopup="true"
+                                onClick={handleClick}
+                                variant="contained" color="success"
+                            >
+                                Меню
+                            </Button>
+                            <Menu
+                                id="menu"
+                                anchorEl={anchorEl}
+                                open={Boolean(anchorEl)}
+                                onClose={handleClose}
+                            >
+                                {hasToken ? (
+                                    <>
+                                        <MenuItem onClick={handleClose}>
+                                            <Link to="/edit" className="linkRR">
+                                                Редактирование
+                                            </Link>
+                                        </MenuItem>
+                                        <MenuItem onClick={handleClose}>
+                                            <Link to="/calc" className="linkRR">
+                                                Калькулятор
+                                            </Link>
+                                        </MenuItem>
+                                        <MenuItem onClick={() => { handleClose(); removeTokenFromLocalStorage(); }}>
+                                            <Link to="/" className="linkRR">
+                                                Выход
+                                            </Link>
+                                        </MenuItem>
+                                    </>
+                                ) : (
+                                    NAV_ITEMS.map((navItem) => (
+                                        <MenuItem key={navItem.label} onClick={handleClose}>
+                                            <Link to={navItem.href} className="linkRR">
+                                                {navItem.label}
+                                            </Link>
+                                        </MenuItem>
+                                    ))
+                                )}
+                            </Menu>
+                        </>
+                    ) : (
+                        hasToken ? (
+                            <Box>
+                                <Button key="Редактирование" color="inherit" component={Link} to="/edit">
+                                    Редактирование
+                                </Button>
+                                <Button key="Калькулятор" color="inherit" component={Link} to="/calc">
+                                    Калькулятор
+                                </Button>
+                                <Button onClick={() => { handleClose(); removeTokenFromLocalStorage(); }} key="Выход" color="inherit" component={Link} to="/">
+                                    Выход
+                                </Button>
+                            </Box>
+                        ) : (
+                            NAV_ITEMS.map((navItem) => (
+                                <Button key={navItem.label} color="inherit" component={Link} to={navItem.href}>
+                                    {navItem.label}
+                                </Button>
+                            ))
+                        )
+                    )}
+                </Toolbar>
+            </AppBar>
+        </Box>
+    );
+}
+
+export default Navbar;

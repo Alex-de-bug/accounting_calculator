@@ -20,7 +20,7 @@ import {
 } from "@mui/material";
 import "../styles/Home.css";
 
-function Home() {
+function EditConst() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { isFetching, isSuccess, isError, errorMessage } = useSelector(homeSelector);
@@ -191,7 +191,7 @@ function Home() {
 
 }
 
-export default Home;
+export default EditConst;
 
 
 

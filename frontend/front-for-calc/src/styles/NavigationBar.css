@@ -1,18 +1,14 @@
 .linkRR{
     text-decoration: none;
     color: inherit;
-    background: linear-gradient(45deg, #ffffff, #c567a6); 
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text; 
 }
 
 .left-text{
     display: none;
 }
 
-@media screen and (min-width: 450px){
+/* @media screen and (min-width: 450px){
     .left-text{
         display: flex;
     }
-}
+} */
