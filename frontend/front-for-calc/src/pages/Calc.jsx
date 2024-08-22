@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {FormControlLabel, Checkbox, Container, Box, Typography, TextField, Tooltip, Select, MenuItem, InputLabel, FormControl } from '@mui/material';
 import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 
 const Calc = () => {
   const [result, setResult] = useState(0); // Состояние для результата
@@ -536,6 +537,7 @@ const Calc = () => {
             </Typography>
         </Box>
         </Container>
+        <Footer />
     </div>
   );
 };

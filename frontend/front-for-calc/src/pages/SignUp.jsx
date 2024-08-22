@@ -5,6 +5,7 @@ import { signupUser, signupSelector, clearState } from '../store/slices/SignUpSl
 import Navbar from '../components/Navbar';
 import {Button, Typography, Container, Box, Snackbar, Alert, TextField} from '@mui/material';
 import "../styles/styles.css"; 
+import Footer from '../components/Footer';
 
 function Signup() {
     const [showPassword, setShowPassword] = useState(false);

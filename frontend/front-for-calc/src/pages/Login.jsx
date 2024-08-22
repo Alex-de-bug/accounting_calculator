@@ -6,6 +6,7 @@ import { Typography, Container, Box, TextField, Button, Snackbar, Alert, useMedi
 import Navbar from '../components/Navbar';
 import { useForm } from 'react-hook-form';
 import "../styles/styles.css"; 
+import Footer from '../components/Footer';
 
 function Login() {
   const dispatch = useDispatch();
@@ -93,6 +94,7 @@ function Login() {
             </Alert>
           </Snackbar>
         </Container>
+
       </div>
   );
 }
