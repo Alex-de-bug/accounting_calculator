@@ -4,7 +4,6 @@ import "./styles/NavigationBar.css"
 import { ThemeProvider } from '@mui/material/styles';
 import theme from './styles/theme.js';
 import CssBaseline from '@mui/material/CssBaseline';
-import './styles/styles.css';
 
 
 

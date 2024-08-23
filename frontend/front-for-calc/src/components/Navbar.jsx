@@ -1,26 +1,28 @@
 import React, { useState } from 'react';
-import { AppBar, Toolbar, Typography, Button, Menu, MenuItem, useMediaQuery, useTheme, Box } from '@mui/material';
+import { AppBar, Toolbar, Typography, Button, MenuItem, useMediaQuery, Box, Dialog, DialogContent, useTheme, IconButton } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
+import MenuIcon from '@mui/icons-material/Menu';
 import { Link } from 'react-router-dom';
 
 function Navbar() {
+    const [menuOpen, setMenuOpen] = useState(false);
     const theme = useTheme();
-    const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
+    // const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
+    const isSmallScreen = useMediaQuery('(max-width:700px)');
 
-    const [anchorEl, setAnchorEl] = useState(null);
-
-    const handleClick = (event) => {
-        setAnchorEl(event.currentTarget);
+    const handleMenuOpen = () => {
+        setMenuOpen(true);
     };
 
-    const handleClose = () => {
-        setAnchorEl(null);
+    const handleMenuClose = () => {
+        setMenuOpen(false);
     };
 
     const removeTokenFromLocalStorage = () => {
-        localStorage.removeItem('token');  // Удаление токена из локального хранилища
+        localStorage.removeItem('token');
     };
 
-    const hasToken = !!localStorage.getItem('token');  // Проверка наличия токена в локальном хранилище
+    const hasToken = !!localStorage.getItem('token'); 
 
     const NAV_ITEMS = [
         { label: 'Главная', href: '/' },
@@ -30,65 +32,178 @@ function Navbar() {
 
     return (
         <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="static">
-                <Toolbar>
+            <AppBar 
+                position="static" 
+                sx={{ 
+                    backgroundColor: 'transparent', 
+                    boxShadow: 'none', 
+                    borderBottom: '1.5px solid black',
+                    width: isSmallScreen ? "80%" : "70%",
+                    margin: '0 auto', 
+                    overflow: 'hidden',
+                    
+                }}
+            >
+                <Toolbar
+                    sx={{
+                        justifyContent: 'center',  
+                    }}
+                >
                     <Typography
                         variant="h6"
                         component="div"
                         sx={{
-                            flexGrow: 1,
-                            fontWeight: 'bold',
                             textAlign: 'center',
-                            marginRight: isSmallScreen ? 0 : 'auto',
-                            marginLeft: isSmallScreen ? 0 : 'auto',
+                            color: 'black',
+                            marginRight: isSmallScreen ? "20%" : "5%",
+                            marginLeft: isSmallScreen ? 0 : "5%",
+                            fontFamily: '"Brush Script MT"',
+                            fontSize: isSmallScreen ? 19 : 28,
                         }}
                     >
-                        {hasToken ? 'Режим администратора' : 'ИП ЖУКОВ ВАДИМ АЛЕКСАНДРОВИЧ'}
+                        {hasToken ? 'Режим администратора' : 'Zhukov Finance'}
                     </Typography>
                     {isSmallScreen ? (
                         <>
                             <Button
                                 aria-controls="menu"
                                 aria-haspopup="true"
-                                onClick={handleClick}
-                                variant="contained" color="success"
+                                onClick={handleMenuOpen}
+                                variant="outlined"
+                                color="black"
+                                sx={{
+                                    fontSize: 12
+                                }}
                             >
-                                Меню
+                                <MenuIcon />
                             </Button>
-                            <Menu
-                                id="menu"
-                                anchorEl={anchorEl}
-                                open={Boolean(anchorEl)}
-                                onClose={handleClose}
+
+                            <Dialog 
+                                fullScreen 
+                                open={menuOpen} 
+                                onClose={handleMenuClose} 
+                                PaperProps={{ sx: { backgroundColor: '#eff0e9', padding: '20px' } }}
                             >
-                                {hasToken ? (
-                                    <>
-                                        <MenuItem onClick={handleClose}>
-                                            <Link to="/edit" className="linkRR">
-                                                Редактирование
-                                            </Link>
-                                        </MenuItem>
-                                        <MenuItem onClick={handleClose}>
-                                            <Link to="/calc" className="linkRR">
-                                                Калькулятор
-                                            </Link>
-                                        </MenuItem>
-                                        <MenuItem onClick={() => { handleClose(); removeTokenFromLocalStorage(); }}>
-                                            <Link to="/" className="linkRR">
-                                                Выход
-                                            </Link>
-                                        </MenuItem>
-                                    </>
-                                ) : (
-                                    NAV_ITEMS.map((navItem) => (
-                                        <MenuItem key={navItem.label} onClick={handleClose}>
-                                            <Link to={navItem.href} className="linkRR">
-                                                {navItem.label}
-                                            </Link>
-                                        </MenuItem>
-                                    ))
-                                )}
-                            </Menu>
+                                <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+                                    <IconButton edge="start" color="inherit" onClick={handleMenuClose} aria-label="close">
+                                        <CloseIcon />
+                                    </IconButton>
+                                </Box>
+                                <DialogContent sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 3 }}>
+                                    {hasToken ? (
+                                        <>
+                                            <MenuItem 
+                                                onClick={handleMenuClose} 
+                                                sx={{
+                                                    fontFamily: '"Dancing Script", cursive',
+                                                    fontSize: '24px',
+                                                    color: '#333',
+                                                    padding: '16px 24px',
+                                                    transition: 'background-color 0.3s ease',
+                                                    '&:hover': {
+                                                        backgroundColor: '#f0f0f0',
+                                                    }
+                                                }}
+                                            >
+                                                <Link 
+                                                    to="/edit" 
+                                                    className="linkRR" 
+                                                    style={{
+                                                        textDecoration: 'none',
+                                                        color: 'inherit',
+                                                        width: '100%',
+                                                        textAlign: 'center',
+                                                    }}
+                                                >
+                                                    Редактирование
+                                                </Link>
+                                            </MenuItem>
+                                            <MenuItem 
+                                                onClick={handleMenuClose}
+                                                sx={{
+                                                    fontFamily: '"Dancing Script", cursive',
+                                                    fontSize: '24px',
+                                                    color: '#333',
+                                                    padding: '16px 24px',
+                                                    transition: 'background-color 0.3s ease',
+                                                    '&:hover': {
+                                                        backgroundColor: '#f0f0f0',
+                                                    }
+                                                }}
+                                            >
+                                                <Link 
+                                                    to="/calc" 
+                                                    className="linkRR" 
+                                                    style={{
+                                                        textDecoration: 'none',
+                                                        color: 'inherit',
+                                                        width: '100%',
+                                                        textAlign: 'center',
+                                                    }}
+                                                >
+                                                    Калькулятор
+                                                </Link>
+                                            </MenuItem>
+                                            <MenuItem 
+                                                onClick={() => { handleMenuClose(); removeTokenFromLocalStorage(); }}
+                                                sx={{
+                                                    fontFamily: '"Dancing Script", cursive',
+                                                    fontSize: '24px',
+                                                    color: '#333',
+                                                    padding: '16px 24px',
+                                                    transition: 'background-color 0.3s ease',
+                                                    '&:hover': {
+                                                        backgroundColor: '#f0f0f0',
+                                                    }
+                                                }}
+                                            >
+                                                <Link 
+                                                    to="/" 
+                                                    className="linkRR" 
+                                                    style={{
+                                                        textDecoration: 'none',
+                                                        color: 'inherit',
+                                                        width: '100%',
+                                                        textAlign: 'center',
+                                                    }}
+                                                >
+                                                    Выход
+                                                </Link>
+                                            </MenuItem>
+                                        </>
+                                    ) : (
+                                        NAV_ITEMS.map((navItem) => (
+                                            <MenuItem 
+                                                key={navItem.label} 
+                                                onClick={handleMenuClose}
+                                                sx={{
+                                                    fontFamily: '"Dancing Script", cursive',
+                                                    fontSize: '24px',
+                                                    color: '#333',
+                                                    padding: '16px 24px',
+                                                    transition: 'background-color 0.3s ease',
+                                                    '&:hover': {
+                                                        backgroundColor: '#f0f0f0',
+                                                    }
+                                                }}
+                                            >
+                                                <Link 
+                                                    to={navItem.href} 
+                                                    className="linkRR" 
+                                                    style={{
+                                                        textDecoration: 'none',
+                                                        color: 'inherit',
+                                                        width: '100%',
+                                                        textAlign: 'center',
+                                                    }}
+                                                >
+                                                    {navItem.label}
+                                                </Link>
+                                            </MenuItem>
+                                        ))
+                                    )}
+                                </DialogContent>
+                            </Dialog>
                         </>
                     ) : (
                         hasToken ? (
@@ -99,7 +214,7 @@ function Navbar() {
                                 <Button key="Калькулятор" color="inherit" component={Link} to="/calc">
                                     Калькулятор
                                 </Button>
-                                <Button onClick={() => { handleClose(); removeTokenFromLocalStorage(); }} key="Выход" color="inherit" component={Link} to="/">
+                                <Button onClick={() => { handleMenuClose(); removeTokenFromLocalStorage(); }} key="Выход" color="inherit" component={Link} to="/">
                                     Выход
                                 </Button>
                             </Box>

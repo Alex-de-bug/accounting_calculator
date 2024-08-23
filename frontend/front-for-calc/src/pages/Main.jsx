@@ -5,7 +5,7 @@ import { signupUser, signupSelector, clearState } from '../store/slices/SignUpSl
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { Card, CardContent, Button, Typography, Container, Box, Grid, Snackbar, Alert, TextField } from '@mui/material';
-import "../styles/styles.css";
+import "../styles/Main.css";
 import { Link } from 'react-router-dom';
 
 function Main() {
@@ -22,38 +22,24 @@ function Main() {
         <div>
             <Navbar />
             <Container maxWidth="lg" sx={{ mt: '6%', mb: '10%' }}>
-                <Box sx={{ mb: "10%", display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', 
-                    p: "5%", borderRadius: 2, backgroundImage: 'url(./phone.jpg)', backgroundSize: 'cover', backgroundPosition: 'center' }}>
+                <Box sx={{mt: 25, mb: 25, display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', 
+                    p: "0%", borderRadius: 2 }}>
                     <Typography variant="h4" component="h1" sx={{
-                        pl: "5%",
-                        color: '#26801d',
+                        pb: 2,
                         fontWeight: 'bold',
-                        fontFamily: 'Arial, sans-serif',
                         letterSpacing: 0.5,
                         '@media (max-width: 600px)': { fontSize: '1.4rem' },
-                        '@media (max-width: 400px)': { fontSize: '1.4rem' },
+                        fontFamily: '"Brush Script MT"',
                     }}>
-                        Упростим ваш бизнес
+                        Уделите внимание росту своего бизнеса, а бумажную работу мы возьмём на себя.
                     </Typography>
-                    <Typography variant="h3" component="h1" sx={{
-                        '@media (max-width: 600px)': { fontSize: '2rem' },
-                        '@media (max-width: 400px)': { fontSize: '2rem' },
-                        mb: "5%",
-                        pl: "10%",
-                        pr: "15%",
-                        color: '#eff0e9',
-                        background: "#26801d",
-                        borderRadius: 10,
-                        fontFamily: 'Arial, sans-serif',
-                        letterSpacing: 10,
-                    }}>
-                        Вместе!
-                    </Typography>
+                    
                     <Typography variant="body1" sx={{
-                        color: 'gray', // Цвет текста на фоне
                         '@media (max-width: 600px)': { fontSize: '0.9rem' }
                     }}>
-                        Наш сайт предлагает комплексные бухгалтерские услуги, направленные на упрощение финансового управления вашего бизнеса. Мы поможем вам сосредоточиться на росте вашего бизнеса, а не на бумажной работе.
+                        Я предлагаю вам комплексные бухгалтерские услуги, 
+                        <br/>
+                        которые будут направленные на упрощение управления вашего бизнеса. 
                     </Typography>
                 </Box>
                 <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2, pb: "10%" }}>

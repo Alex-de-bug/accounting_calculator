@@ -12,6 +12,9 @@ const theme = createTheme({
     nav: {
       main: '#595959',
     },
+    black: {
+      main: '#000000',
+    }
   },
 });
 
