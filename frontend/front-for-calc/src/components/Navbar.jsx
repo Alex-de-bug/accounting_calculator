@@ -54,24 +54,22 @@ function Navbar() {
 
   const NAV_ITEMS = [
     { label: "Главная", href: "/" },
-    { label: "Вход", href: "/login" },
-    { label: "Регистрация", href: "/reg" },
+    { label: "Вход", href: "/login", variant: "outlined" },
+    { label: "Регистрация", href: "/reg", variant: "outlined" },
   ];
 
   return (
-    <Box sx={{ flexGrow: 1, mb: "30px" }}>
+    <Box sx={{ flexGrow: 1, mb: "40px" }}>
       <AppBar
         position="fixed"
         sx={{
-          backgroundColor: isScrolled ? "#eff0e9" : "rgba(255, 255, 255, 0.3)", // добавлено rgba для прозрачности
-          boxShadow: "none",
+          backgroundColor: isScrolled ? "#eff0e9" : "rgba(255, 255, 255, 0.55)",
           borderBottom: "1.5px solid black",
           left: 0,
           right: 0,
           margin: "auto",
           overflow: "hidden",
           transition: "background-color 0.3s ease",
-          backdropFilter: "blur(0.01px)", // добавлено свойство blur
         }}
       >
         <Toolbar>
@@ -81,9 +79,8 @@ function Navbar() {
             sx={{
               textAlign: "center",
               width: "100%",
-              color: isScrolled ? "black" : "black",
-              fontFamily: '"Brush Script MT"',
               fontSize: isSmallScreen ? 19 : 28,
+              fontFamily: "MyFont",
             }}
           >
             {hasToken ? "Режим администратора" : "Zhukov Finance"}
@@ -97,7 +94,6 @@ function Navbar() {
                 variant="outlined"
                 color="black"
                 sx={{
-                  fontSize: 12,
                   marginLeft: "auto",
                 }}
               >
@@ -109,7 +105,10 @@ function Navbar() {
                 open={menuOpen}
                 onClose={handleMenuClose}
                 PaperProps={{
-                  sx: { backgroundColor: "#eff0e9", padding: "20px" },
+                  sx: {
+                    backgroundColor: "#eff0e9",
+                    padding: "10%",
+                  },
                 }}
               >
                 <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
@@ -128,6 +127,7 @@ function Navbar() {
                     flexDirection: "column",
                     alignItems: "center",
                     gap: 3,
+                    pt: "50%",
                   }}
                 >
                   {hasToken ? (
@@ -135,7 +135,7 @@ function Navbar() {
                       <MenuItem
                         onClick={handleMenuClose}
                         sx={{
-                          fontFamily: '"Dancing Script", cursive',
+                          fontFamily: "MyFont",
                           fontSize: "24px",
                           color: "#333",
                           padding: "16px 24px",
@@ -147,7 +147,6 @@ function Navbar() {
                       >
                         <Link
                           to="/edit"
-                          className="linkRR"
                           style={{
                             textDecoration: "none",
                             color: "inherit",
@@ -161,7 +160,7 @@ function Navbar() {
                       <MenuItem
                         onClick={handleMenuClose}
                         sx={{
-                          fontFamily: '"Dancing Script", cursive',
+                          fontFamily: "MyFont",
                           fontSize: "24px",
                           color: "#333",
                           padding: "16px 24px",
@@ -173,7 +172,6 @@ function Navbar() {
                       >
                         <Link
                           to="/calc"
-                          className="linkRR"
                           style={{
                             textDecoration: "none",
                             color: "inherit",
@@ -190,7 +188,7 @@ function Navbar() {
                           removeTokenFromLocalStorage();
                         }}
                         sx={{
-                          fontFamily: '"Dancing Script", cursive',
+                          fontFamily: "MyFont",
                           fontSize: "24px",
                           color: "#333",
                           padding: "16px 24px",
@@ -202,7 +200,6 @@ function Navbar() {
                       >
                         <Link
                           to="/"
-                          className="linkRR"
                           style={{
                             textDecoration: "none",
                             color: "inherit",
@@ -220,19 +217,19 @@ function Navbar() {
                         key={navItem.label}
                         onClick={handleMenuClose}
                         sx={{
-                          fontFamily: '"Dancing Script", cursive',
+                          fontFamily: "MyFont",
                           fontSize: "24px",
                           color: "#333",
                           padding: "16px 24px",
                           transition: "background-color 0.3s ease",
                           "&:hover": {
-                            backgroundColor: "#f0f0f0",
+                            backgroundColor: "#ffffff",
                           },
+                          borderBottom: "1.5px solid black",
                         }}
                       >
                         <Link
                           to={navItem.href}
-                          className="linkRR"
                           style={{
                             textDecoration: "none",
                             color: "inherit",
@@ -253,9 +250,9 @@ function Navbar() {
               {hasToken ? (
                 <Box
                   sx={{
-                    display: "flex", // Включаем Flexbox
-                    flexDirection: "row", // Горизонтальное направление
-                    gap: "10px", // Расстояние между кнопками, можно изменить по необходимости
+                    display: "flex",
+                    flexDirection: "row",
+                    gap: "10px",
                   }}
                 >
                   <Button
@@ -290,9 +287,9 @@ function Navbar() {
               ) : (
                 <Box
                   sx={{
-                    display: "flex", // Включаем Flexbox
-                    flexDirection: "row", // Горизонтальное направление
-                    gap: "10px", // Расстояние между кнопками
+                    display: "flex",
+                    flexDirection: "row",
+                    gap: "10px",
                   }}
                 >
                   {NAV_ITEMS.map((navItem) => (
@@ -301,6 +298,11 @@ function Navbar() {
                       color="inherit"
                       component={Link}
                       to={navItem.href}
+                      sx={{
+                        fontFamily: "MyFont",
+                        fontWeight: "bold",
+                      }}
+                      variant={navItem.variant}
                     >
                       {navItem.label}
                     </Button>

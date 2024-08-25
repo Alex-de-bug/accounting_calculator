@@ -1,0 +1,30 @@
+/* MyButtons.css */
+
+.button-calc,
+.button-telegram {
+  width: 200px;
+  height: 200px;
+  background-size: cover;
+  background-position: center;
+  color: #fff;
+  display: flex; 
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.3s ease; 
+}
+
+.button-calc {
+  background-image: url('../img/calculator.jpg');
+}
+
+.button-calc:hover {
+  transform: scale(1.1);
+}
+
+.button-telegram {
+  background-image: url('../img/tgk.jpg');
+}
+
+.button-telegram:hover {
+  transform: scale(1.1);
+}

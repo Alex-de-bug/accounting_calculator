@@ -1,25 +1,11 @@
 body.home-page::before {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    font-family: "Arial, sans-serif";
     background-image: url("../img/abstr.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: top center;
-    background-attachment: fixed;
-    filter: blur(2px);
-    z-index: -1;
+    filter: blur(4px);
 }
 
 @media (max-width: 700px) {
     body.home-page::before {
-        background-position: top center;
-        /* background-size: 180%; */
-        filter: blur(2px);
+        filter: blur(3px);
     }
 }
 

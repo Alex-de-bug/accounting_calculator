@@ -1,29 +1,35 @@
-/* .gradient-text {
-    background: linear-gradient(45deg, #ffffff, #c567a6); 
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text; 
-  } */
+@font-face {
+    font-family: "MyFont";
+    src: url("../fonts/Hero-Light.ttf") format("truetype");
+    font-weight: 300;
+    font-style: normal;
+}
 
-  /* .top-text {
-    background: linear-gradient(900deg, #ffffff, #c567a6); 
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text; 
-  } */
+@font-face {
+    font-family: "MyFont";
+    src: url("../fonts/Hero-Regular.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "MyFont";
+    src: url("../fonts/Hero-Bold.ttf") format("truetype");
+    font-weight: bold;
+    font-style: normal;
+}
 
 body::before {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  font-family: 'Arial, sans-serif';
-  background-image: url('../img/kirpich.jpg');
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  filter: blur(7px);
-  z-index: -1; /* Помещает размытие позади контента */
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("../img/kirpich.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    filter: blur(7px);
+    z-index: -1; /* Помещает размытие позади контента */
 }
