@@ -1,13 +1,12 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-export const signupUser = createAsyncThunk(
-    "users/signupUser",
-    async ({ name, key, password }, thunkAPI) => {
+export const editConst = createAsyncThunk(
+    "/edit",
+    async ({ name, password }, thunkAPI) => {
         try {
-            let link = "http://localhost:8080/api/auth/register";
+            let link = "http://localhost:8080/api/auth/authenticate";
             const params = {
-                key: key,
                 name: name,
                 password: password
             };
@@ -26,8 +25,8 @@ export const signupUser = createAsyncThunk(
     }
 );
 
-export const SignupSlice = createSlice({
-    name: "signup",
+export const EditSlice = createSlice({
+    name: "edit",
     initialState: {
         token: "",
         isFetching: false,
@@ -45,14 +44,14 @@ export const SignupSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
-            .addCase(signupUser.fulfilled, (state, { payload }) => {
+            .addCase(editConst.fulfilled, (state, { payload }) => {
                 state.token = payload.token;
                 state.isFetching = false;
                 state.isSuccess = true;
                 state.errorMessage = "";
                 return state;
             })
-            .addCase(signupUser.rejected, (state, { payload }) => {
+            .addCase(editConst.rejected, (state, { payload }) => {
                 state.isFetching = false;
                 state.isError = true;
                 try{
@@ -61,14 +60,13 @@ export const SignupSlice = createSlice({
                 }catch{
                     state.errorMessage = "Something went wrong. " + payload
                 }
-                
             })
-            .addCase(signupUser.pending, (state) => {
+            .addCase(editConst.pending, (state) => {
                 state.isFetching = true;
             })
     }
 });
 
-export const { clearState } = SignupSlice.actions;
+export const { clearState } = EditSlice.actions;
 
-export const signupSelector = (state) => state.signup;
+export const editSelector = (state) => state.edit;

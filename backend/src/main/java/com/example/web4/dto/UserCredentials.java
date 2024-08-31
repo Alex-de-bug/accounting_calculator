@@ -12,10 +12,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @NoArgsConstructor
 public class UserCredentials {
     private String name;
-    private String email;
     private String password;
+    private String key;
 
     public UserCredentials encoded(PasswordEncoder encoder) {
-        return new UserCredentials(name, email, encoder.encode(password));
+        return new UserCredentials(name, encoder.encode(password), key);
     }
 }

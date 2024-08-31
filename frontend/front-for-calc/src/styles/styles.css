@@ -31,5 +31,5 @@ body::before {
     background-size: cover;
     background-position: center;
     filter: blur(7px);
-    z-index: -1; /* Помещает размытие позади контента */
+    z-index: -1; 
 }

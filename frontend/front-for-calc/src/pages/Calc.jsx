@@ -38,30 +38,25 @@ const Calc = () => {
   
   
   
-
-
-
-
-
-
   const handleChangeCheckBox = (setter) => (e) => {
-    setter(e.target.checked) // Обновляем состояние чекбоксов
+    setter(e.target.checked)
   }
 
   const handleChangeValue = (setter) => (e) => {
-    setter(e.target.value) // Обновляем состояний из выпадающих списков
+    setter(e.target.value)
   }
 
   const handleChangeTextFields = (setter) => (e) => {
     const value = e.target.value;
     if (value === '' || /^[0-9]+$/.test(value)) {
-      setter(Number(value)); // Установка текстовых полей
+      setter(Number(value));
     }
   };
 
 
-
-
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
 
 

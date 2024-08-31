@@ -5,6 +5,7 @@ import com.example.web4.dto.UserCredentials;
 import com.example.web4.service.UserService;
 import com.example.web4.validators.AuthError;
 import com.example.web4.validators.UserValidation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 
+@Slf4j
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RequestMapping("/api/auth")
@@ -33,13 +35,16 @@ public class UserController {
             AuthorizedUserCredentials credentials = userService.loginUser(userRequest);
             return ResponseEntity.ok().body(credentials);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Неверно указан пароль или логин");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(AuthError.INCORRECT_USERNAME_OR_PASSWORD.getErrorMessage());
         }
     }
 
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@RequestBody UserCredentials userRequest) {
-        AuthError authError = new UserValidation().validateUser(userRequest.getName(), userRequest.getPassword(), userRequest.getEmail());
+        if(!userRequest.getKey().equals("root")){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Отказ в доступе");
+        }
+        AuthError authError = new UserValidation().validateUser(userRequest.getName(), userRequest.getPassword());
         if(authError!=null){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(authError.getErrorMessage());
         }

@@ -14,7 +14,8 @@ function Signup() {
     const { isFetching, isSuccess, isError, errorMessage } = useSelector(signupSelector);
     const [formData, setFormData] = useState({
         name: '',
-        password: ''
+        password: '',
+        key: '',
     });
     const [openError, setOpenError] = useState(false);
 
@@ -72,7 +73,7 @@ function Signup() {
                 minHeight="50vh" 
             >
                     <Typography variant="h4" gutterBottom className="gradient-text">
-                        Регистрация в системе учёта
+                        Регистрация
                     </Typography>
                     <form onSubmit={handleFormSubmit}>
                         <TextField
@@ -103,6 +104,17 @@ function Signup() {
                                 </Button>
                                 ),
                             }}
+                            />
+                        <TextField
+                            label="Код регистрации"
+                            type= "text"
+                            name= "key"
+                            value={formData.key}
+                            onChange={handleChange}
+                            required
+                            fullWidth
+                            margin="normal"
+                            color="secondary"
                             />
                         <Button
                             variant="outlined"

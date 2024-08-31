@@ -21,7 +21,7 @@ export const loginUser = createAsyncThunk(
                 return thunkAPI.rejectWithValue(data);
             }
         } catch (e) {
-            return thunkAPI.rejectWithValue(e.response.data);
+            return thunkAPI.rejectWithValue(e);
         }
     }
 );
@@ -55,7 +55,12 @@ export const LoginSlice = createSlice({
             .addCase(loginUser.rejected, (state, { payload }) => {
                 state.isFetching = false;
                 state.isError = true;
-                state.errorMessage = payload
+                try{
+                    state.errorMessage = payload.response.data
+                    
+                }catch{
+                    state.errorMessage = "Something went wrong. " + payload
+                }
             })
             .addCase(loginUser.pending, (state) => {
                 state.isFetching = true;

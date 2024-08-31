@@ -7,7 +7,7 @@ const theme = createTheme({
       main: '#eff0e9',
     },
     secondary: {
-      main: '#26801d',
+      main: '#000000',
     },
     nav: {
       main: '#595959',

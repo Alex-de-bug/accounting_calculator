@@ -9,13 +9,10 @@ import com.example.web4.repositories.UserRepository;
 import com.example.web4.security.jwt.JwtUtils;
 import com.example.web4.utils.AreaCheck;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.security.Principal;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -42,19 +39,12 @@ public class AttemptService {
         return hitResult;
     }
 
-    @Transactional
-    public User getUserByPrincipal(Principal principal) {
-        if (principal == null) return new User();
-        return userRepository.findByEmail(principal.getName());
-    }
 
     @Transactional
     public List<HitResult> findAllByOwnerId(Long id) {
         return attemptRepository.findByUserId(id).stream()
                 .map(Attempt::toHitResult).collect(Collectors.toList());
     }
-
-
 
     @Transactional
     public void deleteAttempt(Long id) {

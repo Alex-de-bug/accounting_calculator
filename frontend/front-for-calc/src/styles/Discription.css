@@ -14,7 +14,7 @@
 .flex-container {
     display: flex;
     flex-wrap: wrap;
-    gap: 16px; /* Отступы между элементами */
+    gap: 16px; 
     justify-content: space-between; 
     margin-left: 30px;
 }
@@ -27,7 +27,7 @@
 
 @media (max-width: 600px) {
     .flex-item {
-        flex: 1 1 100%; /* 100% ширины на маленьких экранах */
+        flex: 1 1 100%; 
     }
 }
 

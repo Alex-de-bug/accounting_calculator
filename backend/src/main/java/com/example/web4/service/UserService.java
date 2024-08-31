@@ -25,27 +25,23 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
-    private final JwtUtils jwtUtils;
 
-    public AuthError createUser(UserCredentials userCredentials){
-        if(userRepository.findByName(userCredentials.getName()).isPresent()) return AuthError.USER_ALREADY_EXIST;
-        if(userRepository.findByEmail(userCredentials.getEmail())!=null) return AuthError.USER_ALREADY_EXIST;
-        User user = new User(userCredentials.encoded(encoder));
-        user.setPassword(passwordEncoder.encode(userCredentials.getPassword()));
-        log.info("Saving new user with email: {}", user.getEmail());
-        userRepository.save(user);
-        return null;
-    }
     public AuthorizedUserCredentials loginUser(UserCredentials userCredentials) {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(userCredentials.getName(), userCredentials.getPassword())
         );
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        String jwtToken = jwtUtils.generateJwtToken(userCredentials.getName());
+
+        String jwtToken = JwtUtils.generateJwtToken(userCredentials.getName());
         return new AuthorizedUserCredentials(userCredentials.getName(), jwtToken);
     }
-//    @Transactional
-//    public User findById(Long id) {
-//        return userRepository.findById(id);
-//    }
+
+    public AuthError createUser(UserCredentials userCredentials){
+        if(userRepository.findByName(userCredentials.getName()).isPresent()) return AuthError.USER_ALREADY_EXIST;
+        User user = new User(userCredentials.encoded(encoder));
+        user.setPassword(passwordEncoder.encode(userCredentials.getPassword()));
+        log.info("Saving new user with username: {}", user.getUsername());
+        userRepository.save(user);
+        return null;
+    }
 }
