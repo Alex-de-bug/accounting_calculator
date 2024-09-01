@@ -5,7 +5,7 @@ export const editConst = createAsyncThunk(
     "/edit",
     async ({ name, password }, thunkAPI) => {
         try {
-            let link = "http://localhost:8080/api/auth/authenticate";
+            let link = "http://localhost:8080/api/authenticate";
             const params = {
                 name: name,
                 password: password

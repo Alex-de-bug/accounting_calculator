@@ -5,7 +5,7 @@ export const loginUser = createAsyncThunk(
     "users/login",
     async ({ name, password }, thunkAPI) => {
         try {
-            let link = "http://localhost:8080/api/auth/authenticate";
+            let link = "http://localhost:8080/api/authenticate";
             const params = {
                 name: name,
                 password: password

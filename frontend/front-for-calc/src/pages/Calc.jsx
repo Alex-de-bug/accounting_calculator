@@ -3,9 +3,22 @@ import {FormControlLabel, Checkbox, Container, Box, Typography, TextField, Toolt
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import "../styles/styles.css";
+import { calcSelector, calcConst } from '../store/slices/CalcSlice';
+import { useDispatch, useSelector } from 'react-redux';
+
 
 
 const Calc = () => {
+
+    const dispatch = useDispatch();
+    const { ip, ooo, trading, services, building, production, catering,
+        otherOPF, usnd, usndr, osn, psnosn, psnusnd, psnusndr, psnosnusndusndr,
+            isEmployerOpf, additionalSettlement, kkt, ekvari, additionalPatent, agent, separateDivisions,
+            FSRAR, VED, creditsLiz, countPersonals, GPH, foreignPers, decret, komandirovki,
+            counterPP, constGoodsAndService, constRealizeGoodsAndService, constSchetRealizeGoodsAndService, constAvanse} = useSelector(calcSelector);
+
+
+
   const [result, setResult] = useState(0); // Состояние для результата
   const [resultPD, setResultPD] = useState(0); // Состояние для результата
 
@@ -56,6 +69,7 @@ const Calc = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    dispatch(calcConst());
   }, []);
 
 
@@ -69,70 +83,81 @@ const Calc = () => {
     } 
 
     if(opf === 'ООО'){
-        multiplier *= 2.5;
+        multiplier *= ooo;
+    }else{
+        multiplier *= ip;
     }
-
     // Умножитель в зависимости от ОПФ
     if (opf === 'ООО' || (opf === 'ИП'  && (sno === 'УСН Д-Р' || sno === 'ОСН'))) {
       switch (activity) {
         case 'Торговля':
+            multiplier *= trading;
+            break;
         case 'Услуги':
-          multiplier *= 1;
-          break;
+            multiplier *= services;
+            break;
         case 'Строительство':
-          multiplier *= 1.3;
-          break;
+            multiplier *= building;
+            break;
         case 'Производство':
-          multiplier *= 1.5;
-          break;
+            multiplier *= production;
+            break;
         case 'Общепит':
-          multiplier *= 1.2;
-          break;
+            multiplier *= catering;
+            break;
         case 'Прочее':
-          multiplier *= 1;
-          break;
+            multiplier *= otherOPF;
+            break;
         default:
           break;
       }
     }
-
+    
     // Умножитель в зависимости от СНО
     switch (sno) {
       case 'УСН Д':
-        multiplier *= 1;
+        multiplier *= usnd;
         break;
       case 'УСН Д-Р':
-        multiplier *= 1.4;
+        multiplier *= usndr;
         break;
       case 'ОСН':
-        multiplier *= 1.8;
+        multiplier *= osn;
         break;
       case 'ПСН + ОСН':
-        multiplier *= 2.2;
+        multiplier *= psnosn;
         break;
       case 'ПСН + УСН Д':
-        multiplier *= 1.5;
+        multiplier *= psnusnd;
         break;
       case 'ПСН + УСН Д-Р':
-        multiplier *= 1.9;
+        multiplier *= psnusndr;
         break;
       case 'ПСН + ОСН, УСН Д или УСН Д-Р нулевая':
-        multiplier *= 1.2;
+        multiplier *= psnosnusndusndr;
         break;
       default:
         break;
     }
 
+
     if (isEmployer && opf === 'ИП') {
-        multiplier *= 2;
+        multiplier *= isEmployerOpf;
       }
 
-    setResult( baseRate * multiplier + dopRS*2000 + KKT*1500 + ekvaring*1500 + dopPatent*1500 + agents*1500 + obosobPod*5000 + fsrar*5000 + ved*5000 + credits*3000 
-        + countPersonal*1000 + gph*1250 + foreign*2000 + decr*1000 + komandirovk*2000 );
 
-    setResultPD( countPP*150 + goodsAndService*250 + realizeGoodsAndService*250 + schetRealizeGoodsAndService*500 + avanse*500 )
+    setResult( baseRate * multiplier + dopRS*additionalSettlement + KKT*kkt + ekvaring*ekvari + 
+        dopPatent*additionalPatent + agents*agent + obosobPod*separateDivisions + fsrar*FSRAR + ved*VED + credits*creditsLiz 
+        + countPersonal*countPersonals + gph*GPH + foreign*foreignPers + decr*decret + komandirovk*komandirovki );
 
-  }, [baseRate, opf, sno, activity, isEmployer, dopRS, KKT, ekvaring, dopPatent, agents, obosobPod, fsrar, ved, credits, countPersonal, gph, foreign, decr, komandirovk, countPP, goodsAndService, realizeGoodsAndService, schetRealizeGoodsAndService, avanse]);
+    setResultPD( countPP*counterPP + goodsAndService*constGoodsAndService + realizeGoodsAndService*constRealizeGoodsAndService + 
+        schetRealizeGoodsAndService*constSchetRealizeGoodsAndService + avanse*constAvanse )
+
+  }, [ip, ooo, trading, services, building, production, catering,
+        otherOPF, usnd, usndr, osn, psnosn, psnusnd, psnusndr, psnosnusndusndr,
+        isEmployerOpf, additionalSettlement, kkt, ekvari, additionalPatent, agent, separateDivisions,
+        FSRAR, VED, creditsLiz, countPersonals, GPH, foreignPers, decret, komandirovki,
+        counterPP, constGoodsAndService, constRealizeGoodsAndService, constSchetRealizeGoodsAndService, constAvanse, baseRate, opf, sno, activity, isEmployer, dopRS, KKT, ekvaring, dopPatent, agents, obosobPod, fsrar, ved, credits, countPersonal, gph, foreign, decr, komandirovk, countPP, goodsAndService, realizeGoodsAndService, schetRealizeGoodsAndService, avanse]);
 
 
 

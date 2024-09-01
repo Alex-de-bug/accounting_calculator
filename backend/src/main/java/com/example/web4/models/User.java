@@ -22,8 +22,6 @@ public class User implements UserDetails {
     @Column(name = "password", length = 1000)
     private String password;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "user")
-    private List<Attempt> attempts = new ArrayList<>();
     private LocalDateTime dateOfCreated;
 
     public User() {

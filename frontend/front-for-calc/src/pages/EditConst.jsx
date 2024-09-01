@@ -1,197 +1,147 @@
-import Navbar from "../components/Navbar.jsx";
-import Table from "../components/Table.jsx";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { clearState, deleteTry, getTry, homeSelector, sendTry } from "../store/slices/HomeSlice.jsx";
-import { useEffect, useState } from "react";
-import Decart from "../components/Decart.jsx";
-import {Snackbar, Alert, Grid} from '@mui/material';
-import {
-    Button,
-    Checkbox,
-    Container,
-    FormControl,
-    FormControlLabel,
-    FormGroup,
-    FormLabel,
-    Input,
-    InputLabel,
-    Paper
-} from "@mui/material";
-import "../styles/Home.css";
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import { calcSelector, updateCalcConst, calcConst, clearState } from '../store/slices/CalcSlice';
+import { TextField, Button, Container, Box, Typography, Snackbar, Alert } from '@mui/material';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 
-function EditConst() {
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
-    const { isFetching, isSuccess, isError, errorMessage } = useSelector(homeSelector);
-    const [selectedItemX, setSelectedItemX] = useState();
-    const [selectedItemR, setSelectedItemR] = useState();
-    const [formData, setFormData] = useState({
-        x: '',
-        y: '',
-        r: '0'
-    });
-    const [openError, setOpenError] = useState(false); // Состояние для управления видимостью ошибки
+const fieldDescriptions = {
+  ip: 'умножение БС для ИП',
+  ooo: 'умножение БС для ООО',
+  trading: 'умножение БС для торговли',
+  services: 'умножение БС для услуг',
+  building: 'умножение БС для строительства',
+  production: 'умножение БС для производства',
+  catering: 'умножение БС для общепита',
+  otherOPF: 'умножение БС для прочего',
+  usnd: 'умножение БС для УСН Д',
+  usndr: 'умножение БС для УСН Д-Р',
+  osn: 'умножение БС для ОСН',
+  psnosn: 'умножение БС для ПСН + ОСН',
+  psnusnd: 'умножение БС для ПСН + УСН Д',
+  psnusndr: 'умножение БС для ПСН + УСН Д-Р',
+  psnosnusndusndr: 'умножение БС для ПСН + ОСН и прочее',
+  isEmployerOpf: 'вилка на галочку Является работодателем',
+  additionalSettlement: 'вилка для доп расчётов',
+  kkt: 'вилка для ккт',
+  ekvari: 'вилка для точек экваринга',
+  additionalPatent: 'вилка для доп патентов',
+  agent: 'вилка для агентов',
+  separateDivisions: 'вилка для обособленных подразделений',
+  FSRAR: 'вилка на галочку Отчёты в ФСРАР',
+  VED: 'вилка на галочку ВЭД',
+  creditsLiz: 'вилка на галочку Кредиты, Лизинг',
+  countPersonals: 'вилка на количество работников',
+  GPH: 'вилка на количество подрядчиков',
+  foreignPers: 'вилка на галочку Иностранные работники',
+  decret: 'вилка на галочку Декретницы',
+  komandirovki: 'вилка на галочку Командировки',
+  counterPP: 'вилка на поле Количество ПП',
+  constGoodsAndService: 'вилка на поле поступление товаров и услуг',
+  constRealizeGoodsAndService: 'вилка на поле реализация товаров и услуг',
+  constSchetRealizeGoodsAndService: 'вилка на поле  счёт+реал товаров и услуг',
+  constAvanse: 'вилка на поле авансовые отчёты',
+};
 
+const EditCalcPage = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { register, handleSubmit, setValue } = useForm();
+  const { isLoading, isError, isSuccess, ...data } = useSelector(calcSelector);
+  const [openError, setOpenError] = useState(false);
+  const [openSuccess, setOpenSuccess] = useState(false);
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData(prevState => ({
-            ...prevState,
-            [name]: value
-        }));
-        if (name === "x") {
-            setSelectedItemX(e.target.value);
-        }
-        if (name === "r") {
-            setSelectedItemR(e.target.value);
-        }
-    };
+  useEffect(() => {
+    if (!Object.keys(data).length) {
+      dispatch(calcConst());
+    }
+  }, [dispatch]);
 
-    const handleFormSubmit = async (e) => {
-        e.preventDefault();
-        try {
-            await onSubmit(formData);
-        } catch (error) {
-            console.log('Error submitting form: ' + error.message);
-        }
-    };
+  useEffect(() => {
+    if (Object.keys(data).length > 0) {
+      Object.keys(data).forEach((key) => {
+        setValue(key, data[key]);
+      });
+    }
+  }, [data, setValue]);
 
-    const onSubmit = (data) => {
-        console.log(data);
-        dispatch(sendTry(data)).then(() => {
-            dispatch(getTry());
-        });
-    };
+  useEffect(() => {
+    if (isError) {
+      setOpenError(true);
+      setTimeout(() => {
+        setOpenError(false);
+        dispatch(clearState());
+      }, 3000);
+    }
 
-    const onDelete = () => {
-        dispatch(deleteTry()).then(() => {
-            dispatch(getTry());
-        });
-    };
+    if (isSuccess) {
+      setOpenSuccess(true);
+      setTimeout(() => {
+        setOpenSuccess(false);
+        dispatch(clearState());
+      }, 3000);
+    }
+  }, [isError, isSuccess, dispatch]);
 
-    useEffect(() => {
-        return () => {
-            dispatch(clearState());
-            dispatch(getTry());
-        };
-    }, [isSuccess]);
+  const onSubmit = (formData) => {
+    const updatedData = Object.keys(formData).reduce((acc, key) => {
+      acc[key] = parseFloat(formData[key]);
+      return acc;
+    }, {});
 
-    useEffect(() => {
-        if (isError) {
-            dispatch(clearState());
-            setOpenError(true);
-            setTimeout(() => {
-                setOpenError(false);
-                dispatch(clearState());
-            }, 3000);
-        }
+    dispatch(updateCalcConst(updatedData));
+  };
 
-        if (isError) {
-            dispatch(clearState());
-            navigate('/');
-            localStorage.removeItem('token');
-            window.location.reload();
-        }
-    }, [isError, isSuccess]);
+  return (
+    <div>
+      <Navbar />
+      <br />
+      <Container>
+        <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" minHeight="50vh">
+          <Typography variant="h4">Редактировать Константы</Typography>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            {Object.keys(data).length > 0 ? (
+              Object.keys(data).map((key) => (
+                <Box key={key} mb={2}>
+                  <TextField
+                    name={key}
+                    label={key}
+                    type="text"
+                    step="0.01"
+                    {...register(key, { required: true })}
+                    fullWidth
+                    margin="normal"
+                    variant="outlined"
+                  />
+                  <Typography variant="body2" color="textSecondary">
+                    {fieldDescriptions[key] || 'Нет описания'}
+                  </Typography>
+                </Box>
+              ))
+            ) : (
+              <Typography>Загрузка данных...</Typography>
+            )}
+            <Button type="submit" variant="contained" color="primary" disabled={isLoading} style={{ marginTop: '16px' }}>
+              {isLoading ? 'Обновление...' : 'Сохранить'}
+            </Button>
+          </form>
+        </Box>
+        <Snackbar open={openError} autoHideDuration={3000} onClose={() => setOpenError(false)}>
+          <Alert severity="error" onClose={() => setOpenError(false)}>
+            Произошла ошибка при обновлении.
+          </Alert>
+        </Snackbar>
+        <Snackbar open={openSuccess} autoHideDuration={3000} onClose={() => setOpenSuccess(false)}>
+          <Alert severity="success" onClose={() => setOpenSuccess(false)}>
+            Обновление прошло успешно!
+          </Alert>
+        </Snackbar>
+      </Container>
+      <Footer />
+    </div>
+  );
+};
 
-
-    return (
-        <div>
-            <Navbar />
-            <Container maxWidth="sm" sx={{ mt: 4 }}>
-                <Paper sx={{ p: 4 }}>
-
-                    <div className="parent">
-                        <div className="centered">
-                            <Decart r={formData.r}/>
-                        </div>
-                    </div>
-
-                    {/*<Decart r={formData.r} />*/}
-                    <form onSubmit={handleFormSubmit}>
-                        <Grid container spacing={2}> {/* Используем Grid для управления расположением элементов */}
-                            <Grid item xs={12}>
-                                <FormControl component="fieldset">
-                                    <FormLabel component="legend">Координата по оси X:</FormLabel>
-                                    <FormGroup row>
-                                        {['-3', '-2', '-1', '0', '1', '2', '3', '4', '5'].map((value) => (
-                                            <FormControlLabel
-                                                key={`x_${value}`}
-                                                control={
-                                                    <Checkbox
-                                                        name="x"
-                                                        value={value}
-                                                        onChange={handleChange}
-                                                        checked={selectedItemX === value}
-                                                    />
-                                                }
-                                                label={value}
-                                            />
-                                        ))}
-                                    </FormGroup>
-                                </FormControl>
-                            </Grid>
-                            <Grid item xs={12}>
-                                <FormControl fullWidth>
-                                    <InputLabel shrink>Координата по оси Y:</InputLabel>
-                                    <Input
-                                        type="number"
-                                        name="y"
-                                        value={formData.y}
-                                        onChange={handleChange}
-                                        inputProps={{ min: -5, max: 5 }}
-                                        required
-                                    />
-                                </FormControl>
-                            </Grid>
-                            <Grid item xs={12}>
-                                <FormControl component="fieldset">
-                                    <FormLabel component="legend">Размер графика R:</FormLabel>
-                                    <FormGroup row>
-                                        {['0', '1', '2', '3', '4', '5'].map((value) => (
-                                            <FormControlLabel
-                                                key={`r_${value}`}
-                                                control={
-                                                    <Checkbox
-                                                        name="r"
-                                                        value={value}
-                                                        onChange={handleChange}
-                                                        checked={selectedItemR === value}
-                                                    />
-                                                }
-                                                label={value}
-                                            />
-                                        ))}
-                                    </FormGroup>
-                                </FormControl>
-                            </Grid>
-                            <Grid item xs={6}>
-                                <Button variant="contained" type="submit" disabled={isFetching}>
-                                    {isFetching ? 'Sending...' : 'Send'}
-                                </Button>
-                            </Grid>
-                            <Grid item xs={6}>
-                                <Button variant="contained" onClick={onDelete} disabled={isFetching}>
-                                    {isFetching ? 'Deleting...' : 'Delete'}
-                                </Button>
-                            </Grid>
-                        </Grid>
-                    </form>
-                </Paper>
-                <Table />
-            </Container>
-            <Snackbar open={openError} autoHideDuration={3000} onClose={() => setOpenError(false)}>
-                <Alert severity="error" onClose={() => setOpenError(false)}>
-                    {errorMessage}
-                </Alert>
-            </Snackbar>
-        </div>
-    );
-
-}
-
-export default EditConst;
-
-
-
+export default EditCalcPage;

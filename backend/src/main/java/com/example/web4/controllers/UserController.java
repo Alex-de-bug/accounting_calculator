@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
-@RequestMapping("/api/auth")
+@RequestMapping("/api/")
 public class UserController {
     private final UserService userService;
 
@@ -41,7 +41,9 @@ public class UserController {
 
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@RequestBody UserCredentials userRequest) {
-        if(!userRequest.getKey().equals("root")){
+        String environmentKey = System.getenv("USER_KEY");
+
+        if (environmentKey != null && !userRequest.getKey().equals(environmentKey)) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Отказ в доступе");
         }
         AuthError authError = new UserValidation().validateUser(userRequest.getName(), userRequest.getPassword());
