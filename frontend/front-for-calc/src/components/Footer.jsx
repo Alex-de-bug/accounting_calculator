@@ -19,7 +19,7 @@ const Footer = () => {
             color: '#000',
             fontWeight: 300,
          }}>
-        Email: example@example.com
+        Email: support@zhukov-finance.ru
       </Typography>
       <Typography variant="body2"  sx={{
             mr: 2,
@@ -27,7 +27,7 @@ const Footer = () => {
             color: '#000',
             fontWeight: 300,
          }}>
-        Phone: +7 123 456 78 90
+        Phone: +7-910-16-66-277
       </Typography>
       <Typography variant="body2" sx={{
             mr: 2,

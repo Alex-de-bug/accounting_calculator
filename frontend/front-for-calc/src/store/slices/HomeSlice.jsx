@@ -121,13 +121,11 @@ export const HomeSlice = createSlice({
                 console.log(payload);
                 state.isFetching = false;
                 state.isError = true;
-                // state.errorMessage = payload
             })
             .addCase(sendTry.pending, (state) => {
                 state.isFetching = true;
             })
             .addCase(getTry.fulfilled, (state, { payload }) => {
-                // console.log(payload);
                 state.array = payload;
                 state.isFetching = false;
                 return state;

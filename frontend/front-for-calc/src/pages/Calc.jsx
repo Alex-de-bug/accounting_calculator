@@ -565,15 +565,3 @@ const Calc = () => {
 };
 
 export default Calc;
-
-{/* <TextField
-                label=""
-                type="text"
-                value={}
-                onChange={}
-                fullWidth
-                margin="normal"
-                inputProps={{
-                pattern: "[0-9]*", 
-                }}
-            /> */}

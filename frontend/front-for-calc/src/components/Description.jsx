@@ -1,7 +1,6 @@
 import React from "react";
 import { Container, Typography, Grid, Box, Button } from "@mui/material";
 import EmailIcon from "@mui/icons-material/Email";
-import PhoneIcon from "@mui/icons-material/Phone";
 import CloudIcon from "@mui/icons-material/Cloud";
 import AccountTreeIcon from "@mui/icons-material/AccountTree";
 import SupportAgentIcon from "@mui/icons-material/SupportAgent";
@@ -13,7 +12,6 @@ const Discription = () => {
   return (
     <Container sx={{ fontFamily: "MyFont", }}>
       <Grid container spacing={4}>
-        {/* Обертка для всех элементов */}
         <div className="flex-container">
           {/* Section 1 */}
           <Box item xs={12} md={6} className="background-blur flex-item s1">

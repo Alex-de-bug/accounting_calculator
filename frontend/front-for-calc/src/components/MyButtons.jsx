@@ -34,7 +34,7 @@ function MyButtons() {
           component={Link}
           to="/calc"
           variant="contained"
-          className="button-calc" // Использование CSS класса
+          className="button-calc" 
           sx={{
             fontFamily: 'MyFont',
             fontSize: 19,
@@ -53,7 +53,7 @@ function MyButtons() {
           target="_blank"
           rel="noopener noreferrer"
           variant="contained"
-          className="button-telegram" // Использование CSS класса
+          className="button-telegram" 
           sx={{
             fontFamily: 'MyFont',
             fontSize: 19,

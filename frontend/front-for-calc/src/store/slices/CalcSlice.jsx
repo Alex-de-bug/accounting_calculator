@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-// Thunk для получения начальных значений
 export const calcConst = createAsyncThunk(
   "/calc",
   async (_, thunkAPI) => {
@@ -45,8 +44,6 @@ export const updateCalcConst = createAsyncThunk(
       }
     }
   );
-  
-  
   
 
 export const CalcSlice = createSlice({

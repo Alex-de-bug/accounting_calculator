@@ -1,27 +1,13 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import {
-  signupUser,
-  signupSelector,
-  clearState,
-} from "../store/slices/SignUpSlice";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import {
-  Card,
-  CardContent,
   Button,
   Typography,
   Container,
   Box,
-  Grid,
-  Snackbar,
-  Alert,
-  TextField,
 } from "@mui/material";
 import "../styles/Main.css";
-import { Link } from "react-router-dom";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import Discription from "../components/Description";
 import MyButtons from "../components/MyButtons";
@@ -73,7 +59,6 @@ function Main() {
             Имеем большой опыт работы в разных отраслях.
           </Typography>
         </Box>
-        {/* Добавление анимированной стрелочки */}
         <Box
           sx={{
             display: "flex",
@@ -87,7 +72,6 @@ function Main() {
           <KeyboardArrowDownIcon sx={{ fontSize: 67, color: "#000000" }} />
         </Box>
 
-        {/* Окончание добавления анимированной стрелочки */}
       </Container>
 
 
@@ -101,14 +85,11 @@ function Main() {
           }}
         >
           <Discription />
-
           <Box textAlign="center" mt={4}>
             <Button onClick={handleScrollToQw} sx={{ fontFamily: "MyFont" }} variant="contained" color="primary" size="large">
               Связаться с нами
             </Button>
           </Box>
-
-          
         </Box>
       </div>
 

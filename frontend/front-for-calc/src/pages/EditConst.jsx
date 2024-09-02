@@ -127,6 +127,7 @@ const EditCalcPage = () => {
               {isLoading ? 'Обновление...' : 'Сохранить'}
             </Button>
           </form>
+          <br/>
         </Box>
         <Snackbar open={openError} autoHideDuration={3000} onClose={() => setOpenError(false)}>
           <Alert severity="error" onClose={() => setOpenError(false)}>
