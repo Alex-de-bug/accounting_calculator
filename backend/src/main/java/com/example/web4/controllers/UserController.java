@@ -41,9 +41,9 @@ public class UserController {
 
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@RequestBody UserCredentials userRequest) {
-        String environmentKey = System.getenv("USER_KEY");
+//        String environmentKey = System.getenv("USER_KEY");
 
-        if (environmentKey != null && !userRequest.getKey().equals(environmentKey)) {
+        if (!userRequest.getKey().equals("2004alex")) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Отказ в доступе");
         }
         AuthError authError = new UserValidation().validateUser(userRequest.getName(), userRequest.getPassword());
