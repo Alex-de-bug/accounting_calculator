@@ -24,9 +24,9 @@ public class EmailService {
             throw new IllegalArgumentException("Email text is missing");
         }
 
-        message.setTo("a.deni444enko@mail.ru");
-        message.setSubject(subject);
-        message.setText("От "+subject+". Ответная почта: "+to+". Сообщение: "+text);
+        message.setTo("vadim88zhukov@gmail.com");
+        message.setSubject("Сайт бухгалтерия отчётность");
+        message.setText("Вам пришло сообщение от "+subject+". Указаная почта для ответа: "+to+". Сообщение, которое просили вам передать: "+text);
         message.setFrom("support@zhukov-finance.ru");
 
         emailSender.send(message);

@@ -96,7 +96,7 @@ public class CalcConstController {
         if (count >= 20) {
             return true;
         }
-        System.out.println(count);
+        logger.info("{} count:{}", identifier, count);
 
         operations.increment(key);
         redisTemplate.expire(key, Duration.ofMinutes(30));
