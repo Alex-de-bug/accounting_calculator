@@ -5,7 +5,7 @@ export const calcConst = createAsyncThunk(
   "/calc",
   async (_, thunkAPI) => {
     try {
-      let link = "http://localhost:8080/api/const";
+      let link = "https://zhukov-finance.ru/api/const";
       const response = await axios.get(link);
       let data = await response.data;
       if (response.status === 200) {
@@ -33,10 +33,7 @@ export const updateCalcConst = createAsyncThunk(
         }
   
         // const response = await axios.post("http://localhost:8080/api/const", updatedData, {
-        //   headers: {
-        //     Authorization: `Bearer ${token}`  
-        //   }
-        // });
+
         const response = await axios.post("https://zhukov-finance.ru/api/const", updatedData, {
           headers: {
             Authorization: `Bearer ${token}`  

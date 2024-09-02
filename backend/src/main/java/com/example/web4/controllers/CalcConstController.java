@@ -45,7 +45,8 @@ public class CalcConstController {
 
     @GetMapping()
     public ResponseEntity<?> getConst(HttpServletRequest request) {
-        String ipAddress = request.getRemoteAddr();
+        String ipAddress = Optional.ofNullable(request.getHeader("X-Forwarded-For"))
+                .orElseGet(request::getRemoteAddr);
 
         if (isRateLimited(ipAddress)) {
             return ResponseEntity.status(HttpStatus.TOO_MANY_REQUESTS).body("Rate limit exceeded. Try again later.");

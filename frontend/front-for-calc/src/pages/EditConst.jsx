@@ -107,7 +107,6 @@ const EditCalcPage = () => {
                 <Box key={key} mb={2}>
                   <TextField
                     name={key}
-                    label={key}
                     type="text"
                     step="0.01"
                     {...register(key, { required: true })}

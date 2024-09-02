@@ -16,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.Duration;
+import java.util.Optional;
 import java.util.Set;
 
 @Slf4j
@@ -44,7 +45,8 @@ public class EmailController {
 
     @PostMapping()
     public ResponseEntity<?> loginUser(@Valid @RequestBody EmailCredentials emailCredentials, HttpServletRequest request) {
-        String remoteAddress = request.getRemoteAddr();
+        String remoteAddress = Optional.ofNullable(request.getHeader("X-Forwarded-For"))
+                .orElseGet(request::getRemoteAddr);
 
         if (isRateLimited(remoteAddress)) {
             return ResponseEntity.status(HttpStatus.TOO_MANY_REQUESTS).body("Rate limit exceeded. Try again later.");
