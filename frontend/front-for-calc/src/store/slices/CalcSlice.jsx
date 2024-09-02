@@ -32,7 +32,12 @@ export const updateCalcConst = createAsyncThunk(
           throw new Error('Token is missing');
         }
   
-        const response = await axios.post("http://localhost:8080/api/const", updatedData, {
+        // const response = await axios.post("http://localhost:8080/api/const", updatedData, {
+        //   headers: {
+        //     Authorization: `Bearer ${token}`  
+        //   }
+        // });
+        const response = await axios.post("https://zhukov-finance.ru/api/const", updatedData, {
           headers: {
             Authorization: `Bearer ${token}`  
           }

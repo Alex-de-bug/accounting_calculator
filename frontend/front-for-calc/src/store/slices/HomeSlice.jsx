@@ -59,7 +59,7 @@ export const deleteTry = createAsyncThunk(
     async (thunkAPI) => {
         await new Promise(resolve => setTimeout(resolve, 100));
         try {
-            let link = "http://localhost:8080/api/auth/attempt";
+            let link = "https://zhukov-finance.ru/api/auth/attempt";
             const config = {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`
