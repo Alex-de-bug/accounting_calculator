@@ -49,7 +49,7 @@ function MyButtons() {
 
         <Button
           component="a"
-          href="https://external-website.com"
+          href="https://t.me/BuhCraftBot"
           target="_blank"
           rel="noopener noreferrer"
           variant="contained"
