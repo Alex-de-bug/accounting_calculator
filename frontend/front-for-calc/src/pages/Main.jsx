@@ -12,6 +12,7 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import Discription from "../components/Description";
 import MyButtons from "../components/MyButtons";
 import ContactForm from "../components/ContactForm";
+import ContactModal from "../components/ContactModal";
 
 function Main() {
 
@@ -39,7 +40,7 @@ function Main() {
         <Box
           sx={{
             mt: 30,
-            mb: 20,
+            mb: 5,
             display: "flex",
             flexDirection: "column",
             justifyContent: "flex-start",
@@ -49,7 +50,6 @@ function Main() {
             variant="h4"
             component="h1"
             sx={{
-              pb: 2,
               fontFamily: "MyFont",
               "@media (max-width: 600px)": { fontSize: "1.4rem" },
             }}
@@ -59,6 +59,7 @@ function Main() {
             Имеем большой опыт работы в разных отраслях.
           </Typography>
         </Box>
+        <ContactModal/>
         <Box
           sx={{
             display: "flex",
