@@ -88,6 +88,16 @@ const ContactModal = () => {
               >
                 Telegram
               </Button>
+              <Button
+                component={Link}
+                href="https://wa.me/79101666277"
+                sx={{ marginBottom: 1 }}
+                variant="outlined"
+                fullWidth
+                color="black"
+              >
+                WhatsApp
+              </Button>
             </Box>
             <Button
               onClick={handleClose}
