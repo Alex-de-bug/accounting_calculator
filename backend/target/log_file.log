@@ -1,0 +1,53 @@
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.1.5)
+
+2024-09-07T13:52:21.686Z  INFO 394375 --- [           main] com.example.web4.Web4Application         : Starting Web4Application v0.0.1-SNAPSHOT using Java 17.0.12 with PID 394375 (/root/accounting_calculator/backend/target/backend-0.0.1-SNAPSHOT.jar started by root in /root/accounting_calculator/backend/target)
+2024-09-07T13:52:21.691Z  INFO 394375 --- [           main] com.example.web4.Web4Application         : No active profile set, falling back to 1 default profile: "default"
+2024-09-07T13:52:22.900Z  INFO 394375 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2024-09-07T13:52:22.903Z  INFO 394375 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-09-07T13:52:23.164Z  INFO 394375 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 249 ms. Found 2 JPA repository interfaces.
+2024-09-07T13:52:23.190Z  INFO 394375 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2024-09-07T13:52:23.191Z  INFO 394375 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2024-09-07T13:52:23.210Z  INFO 394375 --- [           main] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.example.web4.repositories.UserRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2024-09-07T13:52:23.210Z  INFO 394375 --- [           main] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.example.web4.repositories.ConstsRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2024-09-07T13:52:23.210Z  INFO 394375 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 7 ms. Found 0 Redis repository interfaces.
+2024-09-07T13:52:24.142Z  INFO 394375 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2024-09-07T13:52:24.156Z  INFO 394375 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-09-07T13:52:24.157Z  INFO 394375 --- [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.15]
+2024-09-07T13:52:24.257Z  INFO 394375 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-09-07T13:52:24.258Z  INFO 394375 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2487 ms
+2024-09-07T13:52:24.419Z  INFO 394375 --- [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-09-07T13:52:24.494Z  INFO 394375 --- [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.2.13.Final
+2024-09-07T13:52:24.497Z  INFO 394375 --- [           main] org.hibernate.cfg.Environment            : HHH000406: Using bytecode reflection optimizer
+2024-09-07T13:52:24.927Z  INFO 394375 --- [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-09-07T13:52:24.967Z  INFO 394375 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-09-07T13:52:25.433Z  INFO 394375 --- [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@13cd7ea5
+2024-09-07T13:52:25.436Z  INFO 394375 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-09-07T13:52:26.899Z  INFO 394375 --- [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-09-07T13:52:26.956Z  INFO 394375 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-09-07T13:52:28.403Z  INFO 394375 --- [           main] c.e.w.controllers.CalcConstController    : Все попытки ограничения частоты запросов были очищены при старте приложения.
+2024-09-07T13:52:28.515Z  INFO 394375 --- [           main] c.e.web4.controllers.EmailController     : Все попытки отправки email были очищены при старте приложения.
+2024-09-07T13:52:28.558Z  WARN 394375 --- [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-09-07T13:52:28.891Z  INFO 394375 --- [           main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@6d0e45a5, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@7e7740a5, org.springframework.security.web.context.SecurityContextHolderFilter@3d104c9b, org.springframework.security.web.header.HeaderWriterFilter@4f1afe8f, org.springframework.security.web.authentication.logout.LogoutFilter@7b96de8d, com.example.web4.security.jwt.AuthTokenFilter@7a3e5cd3, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@6da54910, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@24134cbc, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@7aa01bd9, org.springframework.security.web.session.SessionManagementFilter@1fb2eec, org.springframework.security.web.access.ExceptionTranslationFilter@b1b471, org.springframework.security.web.access.intercept.AuthorizationFilter@5438fa43]
+2024-09-07T13:52:29.360Z  INFO 394375 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2024-09-07T13:52:29.377Z  INFO 394375 --- [           main] com.example.web4.Web4Application         : Started Web4Application in 8.277 seconds (process running for 8.967)
+2024-09-07T13:52:39.999Z  INFO 394375 --- [nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-09-07T13:52:40.000Z  INFO 394375 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-09-07T13:52:40.002Z  INFO 394375 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2024-09-07T13:52:40.433Z  INFO 394375 --- [nio-8080-exec-1] c.e.w.s.sevices.AuthUsersDetailsService  : Name auth user: alexdev
+2024-09-07T13:58:23.146Z ERROR 394375 --- [nio-8080-exec-2] c.e.web4.security.jwt.AuthEntryPoint     : Unauthorized error: Full authentication is required to access this resource
+2024-09-07T13:59:21.623Z ERROR 394375 --- [nio-8080-exec-4] c.e.web4.security.jwt.AuthEntryPoint     : Unauthorized error: Full authentication is required to access this resource
+2024-09-07T14:03:02.502Z  INFO 394375 --- [nio-8080-exec-6] c.e.w.s.sevices.AuthUsersDetailsService  : Name auth user: alexdev
+2024-09-07T14:03:09.318Z  INFO 394375 --- [nio-8080-exec-7] c.e.w.controllers.CalcConstController    : 5.18.180.103 count:0
+2024-09-07T14:03:17.006Z  INFO 394375 --- [nio-8080-exec-8] c.e.w.s.sevices.AuthUsersDetailsService  : Name auth user: alexdev
+2024-09-07T14:03:27.372Z ERROR 394375 --- [nio-8080-exec-9] c.e.web4.security.jwt.AuthEntryPoint     : Unauthorized error: Full authentication is required to access this resource
+2024-09-07T14:03:58.773Z  INFO 394375 --- [nio-8080-exec-1] c.e.w.s.sevices.AuthUsersDetailsService  : Name auth user: alexdev
+2024-09-07T14:05:31.017Z  INFO 394375 --- [ionShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-09-07T14:05:31.022Z  INFO 394375 --- [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2024-09-07T14:05:31.057Z  INFO 394375 --- [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
