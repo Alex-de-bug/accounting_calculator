@@ -80,7 +80,7 @@ const ContactModal = () => {
               </Button>
               <Button
                 component={Link}
-                href="https://t.me/konsultant20"
+                href="https://t.me/zhukov_finance"
                 sx={{ marginBottom: 1 }}
                 variant="outlined"
                 fullWidth
