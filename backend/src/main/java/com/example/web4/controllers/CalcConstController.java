@@ -20,7 +20,7 @@ import java.util.*;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
-@RequestMapping("/api/const")
+@RequestMapping("/admin/const")
 public class CalcConstController {
     private final CalcService calcService;
     private final JwtUtils jwtUtils;

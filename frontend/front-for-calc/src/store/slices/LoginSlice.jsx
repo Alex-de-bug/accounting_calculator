@@ -5,7 +5,7 @@ export const loginUser = createAsyncThunk(
     "users/login",
     async ({ name, password }, thunkAPI) => {
         try {
-            let link = "https://zhukov-finance.ru/api/authenticate";
+            let link = "https://zhukov-finance.ru/admin/authenticate";
             const params = {
                 name: name,
                 password: password

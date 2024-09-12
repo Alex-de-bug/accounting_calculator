@@ -22,7 +22,7 @@ import java.util.Set;
 @Slf4j
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
-@RequestMapping("/api/feedback")
+@RequestMapping("/admin/feedback")
 public class EmailController {
     private static final Logger logger = LoggerFactory.getLogger(EmailController.class);
     private final StringRedisTemplate redisTemplate;

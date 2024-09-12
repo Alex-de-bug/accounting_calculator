@@ -5,7 +5,7 @@ export const sendFeedback = createAsyncThunk(
   "feedback/send",
   async ({ name, email, message }, thunkAPI) => {
     try {
-      let link = "https://zhukov-finance.ru/api/feedback";
+      let link = "https://zhukov-finance.ru/admin/feedback";
       const params = {
           name: name,
           email: email,

@@ -6,7 +6,7 @@ export const sendTry = createAsyncThunk(
     async ({ x, y, r }, thunkAPI) => {
         await new Promise(resolve => setTimeout(resolve, 100));
         try {
-            let link = "http://localhost:8080/api/auth/attempt";
+            let link = "https://zhukov-finance.ru/admin/auth/attempt";
             const params = {
                 x: x,
                 y: y,
@@ -34,7 +34,7 @@ export const getTry = createAsyncThunk(
     async (thunkAPI) => {
         await new Promise(resolve => setTimeout(resolve, 100));
         try {
-            let link = "http://localhost:8080/api/auth/attempt";
+            let link = "https://zhukov-finance.ru/admin/auth/attempt";
             const config = {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`
